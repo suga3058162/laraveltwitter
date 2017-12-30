@@ -24,7 +24,9 @@ Route::get('/post', 'PostsController@index')->middleware('auth');
 // Route::get('/post/{id}', 'PostsController@show');
 Route::get('/post/{post}', 'PostsController@show')->where('post', '[0-9]+');
 Route::get('/post/create', 'PostsController@create');
-Route::post('/postposts', 'PostsController@store');
+Route::post('/post', 'PostsController@store');
+Route::get('/post/{post}/edit', 'PostsController@edit');
+Route::patch('/post/{post}', 'PostsController@update');
 
 Auth::routes();
 

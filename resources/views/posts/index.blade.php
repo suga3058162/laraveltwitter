@@ -24,7 +24,10 @@ Blog Posts
     @endforeach
   --}}
   @forelse ($posts as $post)
-  <li><a href="{{ action('PostsController@show', $post) }}">{{ $post->title }}</a></li>
+  <li>
+    <a href="{{ action('PostsController@show', $post) }}">{{ $post->title }}</a>
+    <a href="{{ action('PostsController@edit', $post) }}" class="edit">[Edit]</a>
+  </li>
   @empty
   <li>No posts yet</li>
   @endforelse
