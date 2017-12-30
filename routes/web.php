@@ -25,3 +25,7 @@ Route::get('/post', 'PostsController@index');
 Route::get('/post/{post}', 'PostsController@show')->where('post', '[0-9]+');
 Route::get('/post/create', 'PostsController@create');
 Route::post('/postposts', 'PostsController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
