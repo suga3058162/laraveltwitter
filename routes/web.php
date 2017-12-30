@@ -20,7 +20,7 @@
 //実際にDBにデータを入れる
 // Route::post('posts', 'HelloController@post');
 
-Route::get('/post', 'PostsController@index');
+Route::get('/post', 'PostsController@index')->middleware('auth');
 // Route::get('/post/{id}', 'PostsController@show');
 Route::get('/post/{post}', 'PostsController@show')->where('post', '[0-9]+');
 Route::get('/post/create', 'PostsController@create');
