@@ -28,6 +28,8 @@ Route::post('/post', 'PostsController@store');
 Route::get('/post/{post}/edit', 'PostsController@edit');
 Route::patch('/post/{post}', 'PostsController@update');
 Route::delete('/post/{post}', 'PostsController@destroy');
+Route::post('/post/{post}/comments', 'CommentsController@store');
+Route::delete('/post/{post}/comments/{comment}', 'CommentsController@destroy');
 
 Auth::routes();
 
