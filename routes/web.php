@@ -30,6 +30,13 @@ Route::patch('/post/{post}', 'PostsController@update');
 Route::delete('/post/{post}', 'PostsController@destroy');
 Route::post('/post/{post}/comments', 'CommentsController@store');
 Route::delete('/post/{post}/comments/{comment}', 'CommentsController@destroy');
+Route::post('/likes', 'LikesController@store');
+// Route::post('/likes', function()
+// {
+//     $name = Input::get('post_id');
+//     return "post_id : {$name}";
+// });
+
 
 Auth::routes();
 
