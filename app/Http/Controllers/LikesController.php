@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Input;
 
 class LikesController extends Controller
 {
-    // protected $request;
+    protected $request;
 
-    // public function __construct(Request $request) {
+    public function __construct(Request $request) {
     //   $this->request = $request;
-    //   $this->LikeModel = \App::make('\App\Like');
-    // }
+      $this->LikeModel = \App::make('\App\Like');
+    }
 
     public function store(Request $request) {
       //
@@ -45,7 +45,13 @@ class LikesController extends Controller
       // dd($like);
 
       $post_id = Input::get('post_id');
-      return "post_id : {$post_id}";
+
+      $user = \Auth::user();
+
+
+      // $post_id->save();
+      $this->LikeModel->create(['post_id' => $post_id,'user_id' => $user->id]);
+      return redirect('/post');
 
     }
 }
