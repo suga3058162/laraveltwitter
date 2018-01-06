@@ -42,9 +42,14 @@ class PostsController extends Controller
     }
 
     public function store(PostRequest $request){
+      $user = \Auth::user();
+
       $post = new Post();
       $post->title = $request->title;
       $post->body = $request->body;
+
+      $post->user_id = $user->id;
+
       $post->save();
       return redirect('/post');
     }

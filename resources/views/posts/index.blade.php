@@ -25,6 +25,7 @@ Blog Posts
   --}}
   @forelse ($posts as $post)
   <li>
+    <p>投稿ユーザー：{{ $post->user_id }}</p>
     <a href="{{ action('PostsController@show', $post) }}">{{ $post->title }}</a>
 
     {!! Form::open(['method' => 'post','url' => 'likes']) !!}
