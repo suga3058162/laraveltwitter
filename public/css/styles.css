@@ -15,8 +15,15 @@ h1 {
   border-bottom: 1px solid #ddd;
 }
 
+ul{
+  margin: 0;
+  padding: 0;
+}
+
 ul > li {
-  margin-bottom: 5px;
+  border-top: 1px solid #ddd;
+  list-style: none;
+  padding: 10px;
 }
 
 .header-menu{
@@ -40,9 +47,28 @@ textarea {
   color: tomato;
 }
 
+.user{
+  font-size: 12px;
+  margin: 0;
+}
+
 .edit {
   font-size: 12px;
   color: tomato;
+}
+
+.post_title{
+  margin: 0;
+  display: inline;
+}
+
+.post_body{
+  margin: 0;
+}
+
+.post_detail_link{
+  font-size: 12px;
+  color: tomato;  
 }
 
 .like {
@@ -58,4 +84,19 @@ textarea {
 h2 {
   font-size: 14px;
   padding-top: 25px;
+}
+
+h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: normal;
+}
+
+.list_post_wrap{
+  padding: 10px;
+}
+
+.login_user_name , .login_user_id{
+  font-size: 12px;
+  margin: 0;
 }
