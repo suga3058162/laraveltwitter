@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Like;
+use App\User;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 
 class LikesController extends Controller
 {
@@ -16,6 +18,21 @@ class LikesController extends Controller
     //   $this->request = $request;
       $this->LikeModel = \App::make('\App\Like');
     }
+
+    public function index($id){
+      // $user = Auth::user();
+      // //特定のuser_idを取得
+      // $userId = Auth::user()->id;
+      //userを検索
+      $user = User::where('id', $id)->first();
+      //特定のuser_idに紐づくlikesテーブルに入っているpost_idを取得する
+      $postIds = Like::where('user_id', $user->id)->latest()->get();
+      //postを取得
+      $posts = Post::whereIn('id', $postIds)->get();
+      //配列に入れる
+      $param = ['user' => $user,'posts' => $posts];
+      return view('likes.index', $param);
+    }    
 
     public function store(Request $request) {
       //
