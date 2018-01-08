@@ -17,18 +17,19 @@ class PostsController extends Controller
       //自分がフォローしているユーザーのツイート
       //自分のツイート
       //フォローしているユーザーIDを取得する
-      $userIds = $user->follows->pluck('id');
+      $userIds = $user->follows->pluck('to_user_id');
 
       //自分がフォローしているユーザーのリツイート
       //自分のリツイート
       // $postIds = $posts->retweets->pluck('post_id');
       // $postIds[] = $posts->$user->id;
+      $userIds[] = $user->id;
 
       //特定のuser_idに紐づくretweetsテーブルに入っているpost_idを取得する
-      $postIds = Retweet::whereIn('user_id', $userIds)->orWhere('user_id',$user->id)->pluck('post_id');
+      $postIds = Retweet::whereIn('user_id', $userIds)->pluck('post_id');
 
       //フォローしているユーザーIDを元に、フォローしているユーザーのツイートを、タイムスタンプが新しい順に取得する
-      $posts = Post::whereIn('user_id', $userIds)->orWhere('user_id',$user->id)->orWhereIn('id', $postIds)->latest()->get();
+      $posts = Post::whereIn('user_id', $userIds)->orWhereIn('id', $postIds)->get();
 
       //Postを新しい順にDBから取得する
       // $posts = Post::latest()->get();
