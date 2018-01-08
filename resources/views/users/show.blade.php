@@ -11,7 +11,8 @@
     <a href={{ "/user/edit" }}>ユーザープロフィールを編集する</a>
 @else
     {!! Form::open(['method' => 'post','url' => 'follows']) !!}
-    <input type="hidden" name="from_user_id" value="{{ $user->id }}">
+    <input type="hidden" name="from_user_id" value="{{ $loginUser }}">
+    <input type="hidden" name="to_user_id" value="{{ $user->id }}">
     <button type="submit">Follow</button>
     {!! Form::close() !!}
 @endif

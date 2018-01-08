@@ -17,10 +17,11 @@ class FollowsController extends Controller
 
     public function store(Request $request) {
         $from_user_id = Input::get('from_user_id');
+        $to_user_id = Input::get('to_user_id');
 
         $user = \Auth::user();
 
-        $this->FollowModel->create(['from_user_id' => $from_user_id,'to_user_id' => $user->id]);
-        return redirect("/user/".$from_user_id);
+        $this->FollowModel->create(['from_user_id' => $from_user_id,'to_user_id' => $to_user_id]);
+        return redirect("/user/".$to_user_id);
     }
 }
