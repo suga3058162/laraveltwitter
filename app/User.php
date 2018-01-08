@@ -33,4 +33,10 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany('App\Post', 'user_id');
     }
+    /**
+     * followしているユーザーidを取得
+     */
+    public function follows(){
+        return $this->hasMany('App\Follow', 'from_user_id');
+      }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 
@@ -11,8 +12,15 @@ class PostsController extends Controller
 {
     public function index(){
       $user = Auth::user();
+      //フォローしているユーザーIDを取得する
+      $userIds = $user->follows->pluck('id');
+      $userIds[] = $user->id;
+
+      //フォローしているユーザーIDを元に、フォローしているユーザーのツイートを取得する
+      $posts = Post::whereIn('user_id', $userIds)->get();
+
       //Postを新しい順にDBから取得する
-      $posts = Post::latest()->get();
+      // $posts = Post::latest()->get();
       //配列に入れる
       $param = ['user' => $user, 'posts' => $posts];
       return view('posts.index', $param);
