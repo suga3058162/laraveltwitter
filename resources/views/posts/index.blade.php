@@ -11,6 +11,7 @@ Blog Posts
 @if (Auth::check())
 <p class="login_user_name">ログインユーザー名: {{ $user->name . '(' . $user->email . ')' }}</p>
 <p class="login_user_id">ログインユーザーID: {{ $user->id }}</p>
+<a href="{{ action('UsersController@show', $user) }}" class="post_detail_link">[ユーザー詳細画面へ]</a>
 @else
 <p>※ログインしていません。(<a href="/login">ログイン</a>|<a href="/register">登録</a>)</p>
 @endif
