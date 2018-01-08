@@ -14,4 +14,21 @@
 <p>ユーザーアドレス：</p>
 <p>{{ $user->email }}</p>
 
+<ul>
+  @forelse ($posts as $post)
+  <li>
+
+    <div class="list_post_wrap">
+    <h3>ツイートタイトル：</h3>
+    <p class="post_title">{{ $post->title }}</p>
+    <h3>ツイート内容：</h3>
+    <p class="post_body">{{ $post->body }}</p>
+    </div>
+
+  </li>
+  @empty
+  <li>No posts yet</li>
+  @endforelse
+</ul>
+
 @endsection
