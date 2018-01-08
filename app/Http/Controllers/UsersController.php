@@ -15,11 +15,16 @@ class UsersController extends Controller
     }
 
     public function show($id){
+        //アクセスしているユーザー情報の取得
         $user = User::where('id', $id)->first();
 
         $posts = $user->posts;
 
-        $param = ['user' => $user,'posts' => $posts];
+        //ログインしているユーザーidの取得
+        $loginUser = Auth::user()->id;
+        // dd($loginUser);        
+
+        $param = ['user' => $user,'posts' => $posts,'loginUser' => $loginUser];
         return view('users.show', $param);
     }
 

@@ -4,6 +4,10 @@
 
 @section('content')
 <h1>
+  ログインユーザー
+</h1>
+<p>{{ $loginUser }}</p>
+<h1>
   <a href="{{ url('/post')}}" class="header-menu">Back</a>
   ユーザー詳細
 </h1>
