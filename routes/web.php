@@ -38,6 +38,9 @@ Route::post('/likes', 'LikesController@store');
 // });
 Route::post('/follows', 'FollowsController@store');
 Route::get('/user/{id}', 'UsersController@show')->where('id', '[0-9]+');
+Route::get('/user/edit', 'UsersController@edit');
+// Route::patch('/post/{post}', 'PostsController@update');
+Route::patch('/user', 'UsersController@update');
 
 Auth::routes();
 

@@ -8,9 +8,12 @@
 </h1>
 <p>{{ $loginUser }}</p>
 @if($loginUser == $user->id)
-    <a href="">ユーザープロフィールを編集する</a>
+    <a href={{ "/user/edit" }}>ユーザープロフィールを編集する</a>
 @else
-    <a href="">このユーザーをフォローする</a>
+    {!! Form::open(['method' => 'post','url' => 'follows']) !!}
+    <input type="hidden" name="from_user_id" value="{{ $user->id }}">
+    <button type="submit">Follow</button>
+    {!! Form::close() !!}
 @endif
 <h1>
   <a href="{{ url('/post')}}" class="header-menu">Back</a>

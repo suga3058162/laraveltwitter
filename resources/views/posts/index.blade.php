@@ -28,10 +28,6 @@ Blog Posts
   @forelse ($posts as $post)
   <li>
     <p class="user">投稿ユーザーID：{{ $post->user_id }}</p>
-    {!! Form::open(['method' => 'post','url' => 'follows']) !!}
-    <input type="hidden" name="from_user_id" value="{{ $post->user_id }}">
-    <button type="submit">Follow</button>
-    {!! Form::close() !!}
 
     <div class="list_post_wrap">
     <h3>ツイートタイトル：</h3>

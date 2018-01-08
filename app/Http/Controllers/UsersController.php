@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\PostRequest;
 
 class UsersController extends Controller
 {
@@ -28,7 +27,17 @@ class UsersController extends Controller
         return view('users.show', $param);
     }
 
-    public function edit(User $user){
+    public function edit(){
+        $user = Auth::user();
         return view('users.edit')->with('user', $user);
-      }
+    }
+
+    public function update(Request $request){
+        // dd($request->user);
+        $user = Auth::user();
+        $user->name = $request->user['name'];
+        $user->email = $request->user['email'];
+        $user->save();
+        return redirect('/user/'.$user->id);
+    }    
 }
