@@ -39,4 +39,11 @@ class User extends Authenticatable
     public function follows(){
         return $this->hasMany('App\Follow', 'from_user_id');
       }
+
+    //いいね機能追加
+    public function likes()
+    {
+      return $this->hasMany(Like::class);
+    }
+
 }

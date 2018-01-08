@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-    public function index(){
 
+    public function index(){
+        //user_idを全件取得
+        $users = User::get();
+        return view('users.index', ['users' => $users]);
     }
 
     public function show($id){

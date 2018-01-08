@@ -26,7 +26,7 @@
 
   </li>
   @empty
-  <li>まだいいね！されてません</li>
+  <li>まだいいね！していません</li>
   @endforelse
 </ul>
 @endsection

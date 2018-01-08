@@ -42,6 +42,7 @@ Route::get('/user/edit', 'UsersController@edit');
 // Route::patch('/post/{post}', 'PostsController@update');
 Route::patch('/user', 'UsersController@update');
 Route::get('/user/{id}/likes', 'LikesController@index')->where('id', '[0-9]+');
+Route::get('/users', 'UsersController@index');
 
 Auth::routes();
 
