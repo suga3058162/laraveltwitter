@@ -7,6 +7,11 @@
   ログインユーザー
 </h1>
 <p>{{ $loginUser }}</p>
+@if($loginUser == $user->id)
+    <a href="">ユーザープロフィールを編集する</a>
+@else
+    <a href="">このユーザーをフォローする</a>
+@endif
 <h1>
   <a href="{{ url('/post')}}" class="header-menu">Back</a>
   ユーザー詳細
