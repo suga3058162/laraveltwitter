@@ -7,7 +7,7 @@
   ログインユーザー
 </h1>
 <p>{{ $loginUser }}</p>
-@if($loginUser == $user->id)
+@if($user->isLogin())
     <a href={{ "/user/edit" }}>ユーザープロフィールを編集する</a>
 @else
     {!! Form::open(['method' => 'post','url' => 'follows']) !!}
