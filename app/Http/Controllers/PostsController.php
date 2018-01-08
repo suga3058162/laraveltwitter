@@ -16,8 +16,8 @@ class PostsController extends Controller
       $userIds = $user->follows->pluck('id');
       $userIds[] = $user->id;
 
-      //フォローしているユーザーIDを元に、フォローしているユーザーのツイートを取得する
-      $posts = Post::whereIn('user_id', $userIds)->get();
+      //フォローしているユーザーIDを元に、フォローしているユーザーのツイートを、タイムスタンプが新しい順に取得する
+      $posts = Post::whereIn('user_id', $userIds)->latest()->get();
 
       //Postを新しい順にDBから取得する
       // $posts = Post::latest()->get();
