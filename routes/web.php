@@ -36,7 +36,7 @@ Route::post('/likes', 'LikesController@store');
 //     $name = Input::get('post_id');
 //     return "post_id : {$name}";
 // });
-
+Route::post('/follows', 'FollowsController@store');
 
 Auth::routes();
 
