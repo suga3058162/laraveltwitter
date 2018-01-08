@@ -41,6 +41,13 @@ Blog Posts
     <button type="submit">Like</button>
     {!! Form::close() !!}
 
+    {!! Form::open(['method' => 'post','url' => 'retweets']) !!}
+    <input type="hidden" name="post_id" value="{{ $post->id }}">
+    <input type="hidden" name="post_title" value="{{ $post->title }}">
+    <input type="hidden" name="post_body" value="{{ $post->body }}">
+    <button type="submit">Retweets</button>
+    {!! Form::close() !!}
+
     <a href="{{ action('PostsController@show', $post) }}" class="post_detail_link">[ツイート詳細画面へ]</a>
     <a href="{{ action('PostsController@edit', $post) }}" class="edit">[ツイート編集画面へ]</a>
     <a href="#" class="del" data-id="{{ $post->id }}">[ツイート削除]</a>

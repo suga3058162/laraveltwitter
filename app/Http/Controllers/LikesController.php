@@ -32,7 +32,7 @@ class LikesController extends Controller
       //配列に入れる
       $param = ['user' => $user,'posts' => $posts];
       return view('likes.index', $param);
-    }    
+    }
 
     public function store(Request $request) {
       //

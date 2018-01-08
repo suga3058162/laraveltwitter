@@ -43,6 +43,7 @@ Route::get('/user/edit', 'UsersController@edit');
 Route::patch('/user', 'UsersController@update');
 Route::get('/user/{id}/likes', 'LikesController@index')->where('id', '[0-9]+');
 Route::get('/users', 'UsersController@index');
+Route::post('/retweets', 'RetweetsController@store');
 
 Auth::routes();
 
