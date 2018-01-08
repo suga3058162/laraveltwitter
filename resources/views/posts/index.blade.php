@@ -30,34 +30,38 @@ Blog Posts
     <p class="user">投稿ユーザーID：{{ $post->user_id }}</p>
 
     <div class="list_post_wrap">
-    <h3>ツイートタイトル：</h3>
-    <p class="post_title">{{ $post->title }}</p>
-    <h3>ツイート内容：</h3>
-    <p class="post_body">{{ $post->body }}</p>
+        <h3>ツイートタイトル：</h3>
+        <p class="post_title">{{ $post->title }}</p>
+        <h3>ツイート内容：</h3>
+        <p class="post_body">{{ $post->body }}</p>
     </div>
 
-    {!! Form::open(['method' => 'post','url' => 'likes']) !!}
-    <input type="hidden" name="post_id" value="{{ $post->id }}">
-    <button type="submit">Like</button>
-    {!! Form::close() !!}
+    @if($post->isLiked())
+        <p>いいね解除ボタン</p>
+    @else
+        {!! Form::open(['method' => 'post','url' => 'likes']) !!}
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <button type="submit">Like</button>
+        {!! Form::close() !!}
+    @endif
 
     {!! Form::open(['method' => 'post','url' => 'retweets']) !!}
-    <input type="hidden" name="post_id" value="{{ $post->id }}">
-    <input type="hidden" name="post_title" value="{{ $post->title }}">
-    <input type="hidden" name="post_body" value="{{ $post->body }}">
-    <button type="submit">Retweets</button>
+        <input type="hidden" name="post_id" value="{{ $post->id }}">
+        <input type="hidden" name="post_title" value="{{ $post->title }}">
+        <input type="hidden" name="post_body" value="{{ $post->body }}">
+        <button type="submit">Retweets</button>
     {!! Form::close() !!}
 
     <a href="{{ action('PostsController@show', $post) }}" class="post_detail_link">[ツイート詳細画面へ]</a>
     <a href="{{ action('PostsController@edit', $post) }}" class="edit">[ツイート編集画面へ]</a>
     <a href="#" class="del" data-id="{{ $post->id }}">[ツイート削除]</a>
     <form method="post" action="{{ url('/post', $post->id) }}" id="form_{{ $post->id }}">
-    {{ csrf_field() }}
-    {{ method_field('delete') }}
+        {{ csrf_field() }}
+        {{ method_field('delete') }}
     </form>
   </li>
   @empty
-  <li>No posts yet</li>
+      <li>No posts yet</li>
   @endforelse
 </ul>
 <script src="/js/main.js"></script>

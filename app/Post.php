@@ -36,4 +36,9 @@ class Post extends Model
       return Like::where('user_id', Auth::user()->id)->first();
     }
 
+    public function isLiked(){
+      $like = Like::where('post_id', $this->id)->where('user_id', Auth::user()->id)->first();
+      logger(isset($like));
+      return isset($like);
+  }
 }
