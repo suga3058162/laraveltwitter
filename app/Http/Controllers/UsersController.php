@@ -16,17 +16,8 @@ class UsersController extends Controller
 
     public function show($id){
         $user = User::where('id', $id)->first();
-        // $post = $this->hasMany('App\Post');
-        // dd($post);
-
-        // $post = Post::find($id)->posts;
-        // dd($post);
-
-        // $post = Post::where('user_id', $id)->get();
-        // dd($post);
 
         $posts = $user->posts;
-        // dd($post);
 
         $param = ['user' => $user,'posts' => $posts];
         return view('users.show', $param);
