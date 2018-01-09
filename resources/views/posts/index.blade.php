@@ -9,11 +9,12 @@ Blog Posts
 
 @section('content')
 @if (Auth::check())
+<a href="/login" class="post_detail_link">ログイン・ログアウト画面へ</a>
 <p class="login_user_name">ログインユーザー名: {{ $user->name . '(' . $user->email . ')' }}</p>
 <p class="login_user_id">ログインユーザーID: {{ $user->id }}</p>
 <a href="{{ action('UsersController@show', $user) }}" class="post_detail_link">[ユーザー詳細画面へ]</a>
 @else
-<p>※ログインしていません。(<a href="/login">ログイン</a>|<a href="/register">登録</a>)</p>
+<p>※ログインしていません。(<a href="/login">ログインする</a>|<a href="/register">登録する</a>)</p>
 @endif
 <h1>
   <a href="{{ url('/post/create')}}" class="header-menu">ツイートする</a>
