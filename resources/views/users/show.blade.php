@@ -10,12 +10,20 @@
 @if($user->isLogin())
     <a href={{ "/user/edit" }}>ユーザープロフィールを編集する</a>
 @else
+@endif
+
+@if($user->isFollowd())
+<p>フォロー済み</p>
+@elseif($user->id == $loginUser)
+<p>自分自身はフォローできません</p>
+@else
     {!! Form::open(['method' => 'post','url' => 'follows']) !!}
     <input type="hidden" name="from_user_id" value="{{ $loginUser }}">
     <input type="hidden" name="to_user_id" value="{{ $user->id }}">
     <button type="submit">Follow</button>
     {!! Form::close() !!}
 @endif
+
 <h1>
   <a href="{{ url('/post')}}" class="header-menu">Back</a>
   ユーザー詳細
