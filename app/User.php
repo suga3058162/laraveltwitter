@@ -84,12 +84,15 @@ class User extends Authenticatable
         // logger(isset($follow));
         // return isset($follow);
 
-        $follow = Follow::where('from_user_id', $this->id)->where('to_user_id', Auth::user()->id)->first();
+        // $follow = Follow::where('from_user_id', $this->id)->where('to_user_id', Auth::user()->id)->first();
+
+        $follow = Follow::where('to_user_id', $this->id)->where('from_user_id', Auth::user()->id)->first();
+
         logger(isset($follow));
         return isset($follow);
         // dd(isset($follow));
         // $split = array_splice($follow, 1); //特定のidを削除（失敗）
         // dd($split);
         // dd(isset($split));
-      }
+    }
 }

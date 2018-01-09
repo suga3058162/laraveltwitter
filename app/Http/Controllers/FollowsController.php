@@ -22,6 +22,7 @@ class FollowsController extends Controller
         $user = \Auth::user();
 
         $this->FollowModel->create(['from_user_id' => $from_user_id,'to_user_id' => $to_user_id]);
-        return redirect("/user/".$to_user_id);
+        // return redirect("/user/".$to_user_id);
+        return redirect("/user/{$to_user_id}");
     }
 }

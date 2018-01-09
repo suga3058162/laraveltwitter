@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Follow;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -42,5 +43,16 @@ class UsersController extends Controller
         $user->email = $request->user['email'];
         $user->save();
         return redirect('/user/'.$user->id);
-    }    
+    }
+
+    public function destroy($id) {
+        // dd(Follow::where('to_user_id', $id)->get());
+        $follow = Follow::where('to_user_id',$id)->where('from_user_id',Auth::user()->id)->first();
+        // $follow = Follow::where('from_user_id',$id)->where('to_user_id',Auth::user()->id)->first();
+        // dd(Auth::user()->id);
+        $follow->delete();
+        // return redirect("/user/{{$id}}");
+        return redirect("/user/{$id}");
+    }
+
 }

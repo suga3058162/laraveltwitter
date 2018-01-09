@@ -12,10 +12,16 @@
 @else
 @endif
 
-@if($user->isFollowd())
-<p>フォロー済み</p>
-@elseif($user->id == $loginUser)
+@if($user->id == $loginUser)
 <p>自分自身はフォローできません</p>
+@elseif($user->isFollowd())
+<p>フォロー済み</p>
+{!! Form::open(['url' => '/user/'.$user->id]) !!}
+    {{ method_field('delete') }}
+    <input type="hidden" name="id" value="{{ $user->id }}">
+    <button type="submit">フォロー解除</button>
+{!! Form::close() !!}
+
 @else
     {!! Form::open(['method' => 'post','url' => 'follows']) !!}
     <input type="hidden" name="from_user_id" value="{{ $loginUser }}">
@@ -51,5 +57,5 @@
   <li>No posts yet</li>
   @endforelse
 </ul>
-
+<script src="/js/main.js"></script>
 @endsection
