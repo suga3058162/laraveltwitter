@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    ログインしています
+                    <a href="/post">タイムラインへ</a>
                 </div>
             </div>
         </div>
