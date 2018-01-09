@@ -71,4 +71,17 @@ class LikesController extends Controller
       return redirect('/post');
 
     }
+
+    public function destroy($id) {
+      // dd(Follow::where('to_user_id', $id)->get());
+      // $follow = Follow::where('to_user_id',$id)->where('from_user_id',Auth::user()->id)->first();
+      // dd(Like::where('post_id',$id)->where('user_id',Auth::user()->id)->first());
+      $like = Like::where('post_id',$id)->where('user_id',Auth::user()->id)->first();
+      // $follow = Follow::where('from_user_id',$id)->where('to_user_id',Auth::user()->id)->first();
+      // dd(Auth::user()->id);
+      // $follow->delete();
+      $like->delete();
+      // return redirect("/user/{{$id}}");
+      return redirect("/post");
+    }
 }

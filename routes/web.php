@@ -45,6 +45,7 @@ Route::get('/user/{id}/likes', 'LikesController@index')->where('id', '[0-9]+');
 Route::get('/users', 'UsersController@index');
 Route::post('/retweets', 'RetweetsController@store');
 Route::delete('/user/{id}', 'UsersController@destroy');
+Route::delete('/likes/{id}', 'LikesController@destroy');
 
 Auth::routes();
 

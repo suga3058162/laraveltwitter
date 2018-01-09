@@ -37,7 +37,12 @@ Blog Posts
     </div>
 
     @if($post->isLiked())
-        <p>いいね解除ボタン</p>
+        <p>いいね解除ボタン↓</p>
+        {!! Form::open(['url' => '/likes/'.$post->id]) !!}
+            {{ method_field('delete') }}
+            <input type="hidden" name="id" value="{{ $post->id }}">
+            <button type="submit">いいね解除</button>
+        {!! Form::close() !!}
     @else
         {!! Form::open(['method' => 'post','url' => 'likes']) !!}
             <input type="hidden" name="post_id" value="{{ $post->id }}">
