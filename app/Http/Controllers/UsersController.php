@@ -24,8 +24,7 @@ class UsersController extends Controller
         $posts = $user->posts;
 
         //ログインしているユーザーidの取得
-        $loginUser = Auth::user()->id;
-        // dd($loginUser);        
+        $loginUser = Auth::user()->id;      
 
         $param = ['user' => $user,'posts' => $posts,'loginUser' => $loginUser];
         return view('users.show', $param);
@@ -37,7 +36,6 @@ class UsersController extends Controller
     }
 
     public function update(Request $request){
-        // dd($request->user);
         $user = Auth::user();
         $user->name = $request->user['name'];
         $user->email = $request->user['email'];
@@ -46,12 +44,8 @@ class UsersController extends Controller
     }
 
     public function destroy($id) {
-        // dd(Follow::where('to_user_id', $id)->get());
         $follow = Follow::where('to_user_id',$id)->where('from_user_id',Auth::user()->id)->first();
-        // $follow = Follow::where('from_user_id',$id)->where('to_user_id',Auth::user()->id)->first();
-        // dd(Auth::user()->id);
         $follow->delete();
-        // return redirect("/user/{{$id}}");
         return redirect("/user/{$id}");
     }
 
