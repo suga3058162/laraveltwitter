@@ -30,41 +30,11 @@ class PostsController extends Controller
       // postsテーブルから、$userIdsとuser_idが一致するレコードを取得
       // また、フォローしたユーザーが作成したツイートをOR結合で取得
       $posts = Post::whereIn('user_id', $userIds)->orWhereIn('id', $postIds)->get();
-      
-      // usersテーブルから、$userIdsとidが一致するレコードから、nameを取得
-      // $userNames = User::whereIn('id', $userIds)->pluck('name');
-      // 0,1,2 tomita akane,sugawara,wiener
-      // $postUserIds = User::whereIn('id', $userIds)->pluck('id');
-      // $postUserIds = User::whereIn('id', $userIds)->whereIn('name', $userIds)->pluck('id');
-      // dd($postUserIds);
-      // $postUserNames = User::whereIn('id', $userIds)->pluck('name');
-      
-      // $postUser = array_merge(
-      //   User::whereIn('id', $userIds)->pluck('id'),
-      //   User::whereIn('id', $userIds)->pluck('name')
-      // );
-
-      // $postUsers = array(
-      //   'id' => User::whereIn('id', $userIds)->pluck('id'),
-      //   'name' => User::whereIn('id', $userIds)->pluck('name')
-      // );
-      // dd($postUsers);
-
-      $postUsers = User::whereIn('id', $userIds)->orWhereIn('name', $postIds)->get();
-      // dd($postUsers);
-
-      
-
-      // $tests = $posts->users->pluck('name');
-      // dd($tests);
-
-      // Postを新しい順にDBから取得する
-      // $posts = Post::latest()->get();
 
       // ログインユーザー情報と、ツイート情報をviewへ渡す
-      // $param = ['user' => $user, 'posts' => $posts, 'postUserIds' => $postUserIds, 'postUserNames' => $postUserNames, 'postUsers' => $postUsers];
-      // dd($postUsers);
-      return view('posts.index', compact('user','posts','postUsers'));
+      $param = ['user' => $user, 'posts' => $posts];
+
+      return view('posts.index', $param);
     }
 
     public function show(Post $post){
