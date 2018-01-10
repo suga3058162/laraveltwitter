@@ -1,10 +1,5 @@
 @extends('layouts.default')
 
-{{--
-@section('title')
-Blog Posts
-@endsection
---}}
 @section('title', $post->title)
 
 @section('content')
