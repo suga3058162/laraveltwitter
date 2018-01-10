@@ -12,53 +12,60 @@ use App\Http\Requests\PostRequest;
 class PostsController extends Controller
 {
     public function index(){
+      // ログインユーザー情報を取得
       $user = Auth::user();
 
-      //自分がフォローしているユーザーのツイート
-      //自分のツイート
-      //フォローしているユーザーIDを取得する
+      // to_user_idはログインユーザーがフォローしたユーザーid
+      // followsテーブルからログインユーザーがフォローしているユーザーのレコードを取得
       $userIds = $user->follows->pluck('to_user_id');
 
-      //自分がフォローしているユーザーのリツイート
-      //自分のリツイート
-      // $postIds = $posts->retweets->pluck('post_id');
-      // $postIds[] = $posts->$user->id;
+      // $userIdsは、followsテーブルからログインユーザーがフォローしているユーザーのレコード
+      // 配列にし、idのみ抽出
       $userIds[] = $user->id;
 
-      //特定のuser_idに紐づくretweetsテーブルに入っているpost_idを取得する
+      // retweetテーブルから、$userIdsとuser_idが一致するレコードを取得
+      // retweetsテーブルから、post_idが一致するレコードを取得、post_idのみ抽出
       $postIds = Retweet::whereIn('user_id', $userIds)->pluck('post_id');
 
-      //フォローしているユーザーIDを元に、フォローしているユーザーのツイートを、タイムスタンプが新しい順に取得する
+      // postsテーブルから、$userIdsとuser_idが一致するレコードを取得
+      // また、フォローしたユーザーが作成したツイートをOR結合で取得
       $posts = Post::whereIn('user_id', $userIds)->orWhereIn('id', $postIds)->get();
 
-      //Postを新しい順にDBから取得する
+      // Postを新しい順にDBから取得する
       // $posts = Post::latest()->get();
-      //配列に入れる
+
+      // ログインユーザー情報と、ツイート情報をviewへ渡す
       $param = ['user' => $user, 'posts' => $posts];
       return view('posts.index', $param);
     }
 
-    // public function show($id){
     public function show(Post $post){
-      // $post = Post::find($id);
-      // $post = Post::findOrFail($id);
+      // ルーティングから$postを受け取る
+      // /posts/showへ遷移
+      // ツイート詳細画面へ、ツイート情報を渡す
       return view('posts.show', ['post' => $post]);
     }
 
     public function create(){
+      // /posts/createへ遷移
       return view('posts.create');
     }
 
     public function store(PostRequest $request){
+      // ログインユーザー情報を取得
       $user = \Auth::user();
 
+      // 新しいデータを挿入
       $post = new Post();
+      // postsテーブルのtitleカラムに、POSTデータのtitleの内容を挿入
       $post->title = $request->title;
+      // postsテーブルのbodyカラムに、POSTデータのbodyの内容を挿入
       $post->body = $request->body;
-
+      // postsテーブルのuser_idカラムに、POSTしたログインユーザーidを挿入
       $post->user_id = $user->id;
-
+      // $postに入れたデータをpostsテーブルへ保存
       $post->save();
+      // /postへ遷移
       return redirect('/post');
     }
 
