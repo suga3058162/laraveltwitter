@@ -11,18 +11,7 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::get('/', 'PostsController@index');
-
-// Route::get('/hello', 'HelloController@index');
-
-//実際にDBにデータを入れる
-// Route::post('posts', 'HelloController@post');
-
 Route::get('/post', 'PostsController@index')->middleware('auth');
-// Route::get('/post/{id}', 'PostsController@show');
 Route::get('/post/{post}', 'PostsController@show')->where('post', '[0-9]+');
 Route::get('/post/create', 'PostsController@create');
 Route::post('/post', 'PostsController@store');
@@ -32,15 +21,9 @@ Route::delete('/post/{post}', 'PostsController@destroy');
 Route::post('/post/{post}/comments', 'CommentsController@store');
 Route::delete('/post/{post}/comments/{comment}', 'CommentsController@destroy');
 Route::post('/likes', 'LikesController@store');
-// Route::post('/likes', function()
-// {
-//     $name = Input::get('post_id');
-//     return "post_id : {$name}";
-// });
 Route::post('/follows', 'FollowsController@store');
 Route::get('/user/{id}', 'UsersController@show')->where('id', '[0-9]+');
 Route::get('/user/edit', 'UsersController@edit');
-// Route::patch('/post/{post}', 'PostsController@update');
 Route::patch('/user', 'UsersController@update');
 Route::get('/user/{id}/likes', 'LikesController@index')->where('id', '[0-9]+');
 Route::get('/users', 'UsersController@index');
