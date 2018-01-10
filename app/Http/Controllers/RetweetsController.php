@@ -20,11 +20,8 @@ class RetweetsController extends Controller
     }
 
     public function store(Request $request) {
-
         $post_id = Input::get('post_id');
-  
         $user = \Auth::user();
-  
         $this->RetweetModel->create(['user_id' => $user->id,'post_id' => $post_id]);
         return redirect('/post');
     }
