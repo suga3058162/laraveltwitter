@@ -1,11 +1,11 @@
 @extends('layouts.default')
 
-@section('title', 'Edit Post')
+@section('title', 'ツイートの編集')
 
 @section('content')
 <h1>
   <a href="{{ url('/post')}}" class="header-menu">Back</a>
-  Edit Post
+  ツイートの編集
 </h1>
 <form method="post" action="{{ url('/post' , $post->id) }}">
   {{ csrf_field() }}
