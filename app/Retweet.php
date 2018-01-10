@@ -10,5 +10,4 @@ class Retweet extends Model
         'user_id',
         'post_id'
     ];
-
 }
