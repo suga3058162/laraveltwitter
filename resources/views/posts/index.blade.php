@@ -1,17 +1,13 @@
 @extends('layouts.default')
 
-{{--
-@section('title')
-Blog Posts
-@endsection
---}}
-@section('title', 'Blog Posts')
+@section('title', 'ツイート一覧')
 
 @section('content')
 @if (Auth::check())
 <a href="/login" class="post_detail_link">ログイン・ログアウト画面へ</a>
-<p class="login_user_name">ログインユーザー名: {{ $user->name . '(' . $user->email . ')' }}</p>
-<p class="login_user_id">ログインユーザーID: {{ $user->id }}</p>
+<p class="login_user_id">ログインユーザーid: {{ $user->id }}</p>
+<p class="login_user_name">ログインユーザーname: {{ $user->name }}</p>
+<p class="login_user_name">ログインユーザーemail: {{ $user->email }}</p>
 <a href="{{ action('UsersController@show', $user) }}" class="post_detail_link">[ユーザー詳細画面へ]</a>
 @else
 <p>※ログインしていません。(<a href="/login">ログインする</a>|<a href="/register">登録する</a>)</p>
@@ -21,16 +17,13 @@ Blog Posts
   ツイート一覧
 </h1>
 <ul>
-  {{--
-    @foreach ($posts as $post)
-    <li><a href="">{{ $post->title }}</a></li>
-    @endforeach
-  --}}
   @forelse ($posts as $post)
   <li>
-    <p class="user">投稿ユーザーID：{{ $post->user_id }}</p>
-
     <div class="list_post_wrap">
+        <h3>投稿ユーザーid：</h3>
+        <p class="post_title">{{ $post->user_id }}</p>
+        <h3>投稿ユーザーname：</h3>
+        <p class="post_title">{{ $post->user->name }}</p>
         <h3>ツイートタイトル：</h3>
         <p class="post_title">{{ $post->title }}</p>
         <h3>ツイート内容：</h3>
@@ -38,7 +31,6 @@ Blog Posts
     </div>
 
     @if($post->isLiked())
-        <p>いいね解除ボタン↓</p>
         {!! Form::open(['url' => '/likes/'.$post->id]) !!}
             {{ method_field('delete') }}
             <input type="hidden" name="id" value="{{ $post->id }}">

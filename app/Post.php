@@ -15,6 +15,7 @@ class Post extends Model
     }
 
     public function user() {
+      // 多対1のリレーション　userテーブル(多)
       return $this->belongsTo(User::class);
     }
 
