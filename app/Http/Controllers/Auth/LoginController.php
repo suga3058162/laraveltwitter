@@ -36,4 +36,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    //AuthenticatesUsersトレイトで定義されたlogout()をオーバーライト。
+    //最終行のreturn redirect();の内容を変更する。
+    public function logout()
+    {
+        $this->guard()->logout();
+
+        return redirect('/login');
+    }
 }
